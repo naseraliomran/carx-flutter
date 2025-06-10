@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/view/home/detailesfoecaruserselected.dart';
 import 'package:car_x/view/sell/detailesfoecarsoldselected.dart';
 
@@ -84,7 +86,7 @@ class sold extends StatelessWidget {
                                 itemBuilder: (context, index, rindex) {
                                   return Container(
                                       child: Image.network(
-                                    "http://10.0.2.2:8000/images/CarPictures/" +
+                                    "${ApiConfig.baseUrl}/images/CarPictures/" +
                                         (controller.imagecar[index]['imageName']
                                             .toString()),
                                     fit: BoxFit.cover,
@@ -130,7 +132,7 @@ class getallsoldcarcontroller extends GetxController {
   var detaildata;
   Future getallsoldcars() async {
     update();
-    var url = Uri.parse('http://10.0.2.2:8000/api/Car/getAllSoldCars');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/Car/getAllSoldCars');
     var response = await http.get(url, headers: {
       'Authorization': 'Bearer $token',
       "Connection": "Keep-Alive",
@@ -140,7 +142,7 @@ class getallsoldcarcontroller extends GetxController {
     data = json.decode(response.body);
 
     if (status == 200) {
-      print(data);
+      if (kDebugMode) debugPrint(data);
 
       if (data.toString().contains('no')) {
         car = data;

@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -9,7 +11,7 @@ class getallcarusercontroller extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString("token");
     getallcarsuser();
-    print(token);
+    if (kDebugMode) debugPrint(token);
     super.onInit();
   }
 
@@ -30,7 +32,7 @@ class getallcarusercontroller extends GetxController {
   var detaildata;
   Future<void> getallcarsuser() async {
     Future.delayed(Duration(seconds: 2));
-    var url = Uri.parse('http://10.0.2.2:8000/api/User/Car/getAll');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/User/Car/getAll');
     var response = await http.get(url, headers: {
       'Authorization': 'Bearer $token',
       "Connection": "Keep-Alive",
@@ -43,7 +45,7 @@ class getallcarusercontroller extends GetxController {
 
     if (status == 200) {
       car = data;
-      print(data);
+      if (kDebugMode) debugPrint(data);
       update();
     }
   }

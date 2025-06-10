@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/moudle/admin/update_company.dart';
 import 'package:car_x/view/addempl/addemplcontroller.dart';
 import 'package:car_x/view/addempl/viewemployee/viewemployeecontroler.dart';
@@ -11,7 +13,7 @@ Future<void> addemployeeco() async {
     addemplocontroler(),
   );
   var token = controller.token.toString();
-  var url = Uri.parse('http://10.0.2.2:8000/api/Employee/save');
+  var url = Uri.parse('${ApiConfig.baseUrl}/api/Employee/save');
   var response = await http.post(url, headers: {
     "Accept": "application/json",
     "Authorization": "Bearer $token"
@@ -25,8 +27,8 @@ Future<void> addemployeeco() async {
   });
 
   var status = response.statusCode;
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+  if (kDebugMode) debugPrint('Response body: ${response.body}');
   if (status == 200) {
     Get.rawSnackbar(
       barBlur: 3,
@@ -70,7 +72,7 @@ Future<void> updateemployeeco() async {
   );
   var ids = controller1.id;
   var token = controller.token.toString();
-  var url = Uri.parse('http://10.0.2.2:8000/api/Employee/update/$ids');
+  var url = Uri.parse('${ApiConfig.baseUrl}/api/Employee/update/$ids');
   var response = await http.post(url, headers: {
     "Accept": "application/json",
     "Authorization": "Bearer $token"
@@ -84,8 +86,8 @@ Future<void> updateemployeeco() async {
   });
 
   var status = response.statusCode;
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+  if (kDebugMode) debugPrint('Response body: ${response.body}');
   if (status == 200) {
     Get.rawSnackbar(
       barBlur: 2,

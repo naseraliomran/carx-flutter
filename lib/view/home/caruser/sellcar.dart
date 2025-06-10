@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -8,7 +10,7 @@ class sellmycar extends GetxController {
   var buyersPhoneNumber;
   var id;
   Future<void> mysellcarconn() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/User/Car/saleCar/$id');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/User/Car/saleCar/$id');
     var response = await http.post(url,
         body: {'buyerName': buyerName, 'buyersPhoneNumber': buyersPhoneNumber});
 

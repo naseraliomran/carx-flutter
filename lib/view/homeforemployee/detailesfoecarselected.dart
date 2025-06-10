@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/view/cars/image/getallcars.dart';
 import 'package:car_x/view/homeforemployee/bookings/bookemp.dart';
 import 'package:car_x/view/homeforemployee/deletecar.dart';
@@ -54,7 +56,7 @@ class _cardetailsforemploState extends State<cardetailsforemplo> {
               itemBuilder: (context, index, rindex) {
                 return Container(
                     child: Image.network(
-                  "http://10.0.2.2:8000/images/CarPictures/" +
+                  "${ApiConfig.baseUrl}/images/CarPictures/" +
                       (controller.detaildata['image_car'][index]['imageName']
                           .toString()),
                   fit: BoxFit.cover,

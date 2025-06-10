@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
@@ -17,7 +19,7 @@ class accountcontroller extends GetxController {
   Map users = {};
 
   profileco() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/me');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/me');
 
     var response =
         await http.get(url, headers: {'Authorization': 'Bearer ${token}'});

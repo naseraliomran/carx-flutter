@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:car_x/view/workshop/mentview.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -46,7 +47,7 @@ class MapsampleState extends State<Mapsample> {
 
     _center = LatLng(currentLocation.latitude, currentLocation.longitude);
 
-    print('center $_center');
+    if (kDebugMode) debugPrint('center $_center');
 
     _kGooglePlex = CameraPosition(
       target: _center,
@@ -120,7 +121,7 @@ class MapsampleState extends State<Mapsample> {
             _controller?.animateCamera(CameraUpdate.newLatLng(
               _center,
             ));
-            print(_center);
+            if (kDebugMode) debugPrint(_center);
           },
           label: Row(
             mainAxisAlignment: MainAxisAlignment.center,

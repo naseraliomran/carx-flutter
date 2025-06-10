@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/control/worksope/workshope_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -9,7 +11,7 @@ Future<void> addworkeshopconn() async {
     workashopcontrol(),
   );
   var rate = 0;
-  var url = Uri.parse('http://10.0.2.2:8000/api/Workshop/save');
+  var url = Uri.parse('${ApiConfig.baseUrl}/api/Workshop/save');
   var response = await http.post(url, body: {
     'nameWorkshop': controller.name_ar,
     'phone': controller.phone,
@@ -26,8 +28,8 @@ Future<void> addworkeshopconn() async {
   });
 
   var status = response.statusCode;
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+  if (kDebugMode) debugPrint('Response body: ${response.body}');
 
   if (status == 200) {
     Get.rawSnackbar(

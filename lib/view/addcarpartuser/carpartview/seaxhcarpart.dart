@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 import 'package:car_x/view/addcarpartuser/carpartview/search.dart';
 import 'package:car_x/view/addcarpartuser/carpartview/ser.dart';
@@ -90,7 +92,7 @@ class viewcarpaart extends StatelessWidget {
                                     children: [
                                       Container(
                                           child: Image.network(
-                                              "http://10.0.2.2:8000/images/CarPartsPictures/" +
+                                              "${ApiConfig.baseUrl}/images/CarPartsPictures/" +
                                                   (controller22.data[index]
                                                           ['imagPart']
                                                       .toString()))),
@@ -270,18 +272,18 @@ class carpart extends GetxController {
 
   getallcarspaaartuser() async {
     Future.delayed(Duration(seconds: 2));
-    var url = Uri.parse('http://10.0.2.2:8000/api/User/Parts/viewAllPartsCar');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/User/Parts/viewAllPartsCar');
     var response =
         await http.get(url, headers: {'Authorization': 'Bearer $token'});
     var status = response.statusCode;
     data = json.decode(response.body);
-    print(data);
+    if (kDebugMode) debugPrint(data);
     update();
   }
 
   List car = [];
   searchpart() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/User/Parts/filtering');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/User/Parts/filtering');
     var response = await http.post(url, headers: {
       'Authorization': 'Bearer $token'
     }, body: {
@@ -293,11 +295,11 @@ class carpart extends GetxController {
     var status = response.statusCode;
     data2 = json.decode(response.body);
     if (response.body.toString().contains('not')) {
-      print('--------');
+      if (kDebugMode) debugPrint('--------');
     } else {
       car = json.decode(response.body)[0]['imagPart'];
     }
-    print(data2);
+    if (kDebugMode) debugPrint(data2);
     update();
   }
 }

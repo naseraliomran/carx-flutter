@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -22,7 +24,7 @@ class bookingemploo extends GetxController {
   var token;
   Future sendbookingemplo() async {
     var url =
-        Uri.parse('http://10.0.2.2:8000/api/Employee/Booking/bookingCar/$id');
+        Uri.parse('${ApiConfig.baseUrl}/api/Employee/Booking/bookingCar/$id');
     var response = await http.post(
       url,
       headers: {
@@ -33,7 +35,7 @@ class bookingemploo extends GetxController {
 
     var status = response.statusCode;
 
-    print(status);
+    if (kDebugMode) debugPrint(status);
     if (response.body.isNotEmpty) {
       Get.rawSnackbar(
         barBlur: 3,
@@ -61,7 +63,7 @@ class bookingemploo extends GetxController {
 
   Future cancelebookingemplo() async {
     var url = Uri.parse(
-        'http://10.0.2.2:8000/api/Employee/Booking/cancellationOfBooking/$id');
+        '${ApiConfig.baseUrl}/api/Employee/Booking/cancellationOfBooking/$id');
     var response = await http.post(
       url,
       headers: {
@@ -72,7 +74,7 @@ class bookingemploo extends GetxController {
 
     var status = response.statusCode;
 
-    print(status);
+    if (kDebugMode) debugPrint(status);
     if (response.body.isNotEmpty) {
       Get.rawSnackbar(
         barBlur: 3,
@@ -107,7 +109,7 @@ class bookingemploo extends GetxController {
 
   Future rentbookingemploo() async {
     var url = Uri.parse(
-        'http://10.0.2.2:8000/api/Employee/Booking/getRequestRentalBookings');
+        '${ApiConfig.baseUrl}/api/Employee/Booking/getRequestRentalBookings');
     var response = await http.get(
       url,
       headers: {
@@ -122,12 +124,12 @@ class bookingemploo extends GetxController {
       item1 = data1;
     }
     update();
-    print(data1);
+    if (kDebugMode) debugPrint(data1);
   }
 
   Future soldbookingemploo() async {
     var url = Uri.parse(
-        'http://10.0.2.2:8000/api/Employee/Booking/getRequestSoldBookings');
+        '${ApiConfig.baseUrl}/api/Employee/Booking/getRequestSoldBookings');
     var response = await http.get(
       url,
       headers: {
@@ -142,12 +144,12 @@ class bookingemploo extends GetxController {
       item2 = data2;
     }
     update();
-    print(data2);
+    if (kDebugMode) debugPrint(data2);
   }
 
   Future conformreqemploo() async {
     var url = Uri.parse(
-        'http://10.0.2.2:8000/api/Employee/Booking/confirmRequest/$id');
+        '${ApiConfig.baseUrl}/api/Employee/Booking/confirmRequest/$id');
     var response = await http.get(
       url,
       headers: {
@@ -159,7 +161,7 @@ class bookingemploo extends GetxController {
     var status = response.statusCode;
 
     update();
-    print(status);
+    if (kDebugMode) debugPrint(status);
     if (status == 200) {
       Get.rawSnackbar(
         barBlur: 3,
@@ -185,7 +187,7 @@ class bookingemploo extends GetxController {
 
   Future rejectreqemploo() async {
     var url = Uri.parse(
-        'http://10.0.2.2:8000/api/Employee/Booking/rejectionBooking/$id');
+        '${ApiConfig.baseUrl}/api/Employee/Booking/rejectionBooking/$id');
     var response = await http.get(
       url,
       headers: {
@@ -197,7 +199,7 @@ class bookingemploo extends GetxController {
     var status = response.statusCode;
 
     update();
-    print(status);
+    if (kDebugMode) debugPrint(status);
     if (status == 200) {
       Get.rawSnackbar(
         barBlur: 3,

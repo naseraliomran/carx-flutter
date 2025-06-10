@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 
 import 'package:car_x/control/companys/add_company_controller.dart';
@@ -10,7 +12,7 @@ Future<void> addcompanyconn() async {
   addcopanycontrol controller = Get.put(
     addcopanycontrol(),
   );
-  var url = Uri.parse('http://10.0.2.2:8000/api/Company/save');
+  var url = Uri.parse('${ApiConfig.baseUrl}/api/Company/save');
   var response = await http.post(url, body: {
     'nameCompany': controller.compyname,
     'code': controller.code,
@@ -22,8 +24,8 @@ Future<void> addcompanyconn() async {
   });
 
   var status = response.statusCode;
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+  if (kDebugMode) debugPrint('Response body: ${response.body}');
   if (status == 200) {
     Get.rawSnackbar(
       barBlur: 2,

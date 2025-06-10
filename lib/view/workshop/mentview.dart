@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/view/workshop/conform.dart';
 import 'package:car_x/view/workshop/mapment.dart';
 import 'package:flutter/material.dart';
@@ -177,7 +179,7 @@ class getallmentcontroller extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString("worktoken");
     getallmentconn();
-    print(token);
+    if (kDebugMode) debugPrint(token);
     super.onInit();
   }
 
@@ -195,7 +197,7 @@ class getallmentcontroller extends GetxController {
   List req = [];
   Future getallmentconn() async {
     var url = Uri.parse(
-        'http://10.0.2.2:8000/api/WorkShop/Maintenance/getAllMaintenanceRequest');
+        '${ApiConfig.baseUrl}/api/WorkShop/Maintenance/getAllMaintenanceRequest');
     var response = await http.get(url, headers: {
       'Authorization': 'Bearer $token',
       "Connection": "Keep-Alive",
@@ -204,14 +206,14 @@ class getallmentcontroller extends GetxController {
     var status = response.statusCode;
     data = json.decode(response.body);
     if (status == 200) {
-      print(data);
+      if (kDebugMode) debugPrint(data);
       update();
     }
   }
 
   Future confirmmentconn() async {
     var url = Uri.parse(
-        'http://10.0.2.2:8000/api/WorkShop/Maintenance/confirmRequest/$id');
+        '${ApiConfig.baseUrl}/api/WorkShop/Maintenance/confirmRequest/$id');
     var response = await http.get(url, headers: {
       'Authorization': 'Bearer $token',
       "Connection": "Keep-Alive",
@@ -222,7 +224,7 @@ class getallmentcontroller extends GetxController {
 
   Future cancelementconn() async {
     var url = Uri.parse(
-        'http://10.0.2.2:8000/api/WorkShop/Maintenance/cancellationRequest/$id');
+        '${ApiConfig.baseUrl}/api/WorkShop/Maintenance/cancellationRequest/$id');
     var response = await http.put(url, headers: {
       'Authorization': 'Bearer $token',
       "Connection": "Keep-Alive",
@@ -231,7 +233,7 @@ class getallmentcontroller extends GetxController {
     var status = response.statusCode;
     data2 = json.decode(response.body);
     if (status == 200) {
-      print(data2);
+      if (kDebugMode) debugPrint(data2);
       update();
     }
   }

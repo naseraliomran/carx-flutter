@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/view/addempl/addemplcontroller.dart';
 import 'package:car_x/view/addempl/viewemployee/viewemployeecontroler.dart';
 import 'package:car_x/view/addstore/addstorescontroller.dart';
@@ -12,7 +14,7 @@ Future<void> addstorecon() async {
     addstorecontroler(),
   );
   var token = controller.token.toString();
-  var url = Uri.parse('http://10.0.2.2:8000/api/Store/save');
+  var url = Uri.parse('${ApiConfig.baseUrl}/api/Store/save');
   var response = await http.post(url, headers: {
     "Accept": "application/json",
     "Authorization": "Bearer $token"
@@ -24,8 +26,8 @@ Future<void> addstorecon() async {
   });
 
   var status = response.statusCode;
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+  if (kDebugMode) debugPrint('Response body: ${response.body}');
   if (status == 200) {
     Get.rawSnackbar(
       barBlur: 3,
@@ -69,7 +71,7 @@ Future<void> updatestoreco() async {
   );
   var ids = controller1.id;
   var token = controller.token.toString();
-  var url = Uri.parse('http://10.0.2.2:8000/api/Store/update/$ids');
+  var url = Uri.parse('${ApiConfig.baseUrl}/api/Store/update/$ids');
   var response = await http.post(url, headers: {
     "Accept": "application/json",
     "Authorization": "Bearer $token"
@@ -81,8 +83,8 @@ Future<void> updatestoreco() async {
   });
 
   var status = response.statusCode;
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+  if (kDebugMode) debugPrint('Response body: ${response.body}');
   if (status == 200) {
     Get.back();
     Get.rawSnackbar(

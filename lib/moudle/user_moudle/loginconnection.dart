@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 import 'package:car_x/control/user_controller/logincontroller.dart';
 
@@ -17,7 +19,7 @@ Future<void> loginco() async {
   Userlogincontroler controller =
       Get.put(Userlogincontroler(), permanent: true);
 
-  var url = Uri.parse('http://10.0.2.2:8000/api/login');
+  var url = Uri.parse('${ApiConfig.baseUrl}/api/login');
 
   var response = await http.post(url, body: {
     'mobile': controller.phonenumber,
@@ -25,8 +27,8 @@ Future<void> loginco() async {
   });
   var status = response.statusCode;
   data = jsonDecode(response.body);
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+  if (kDebugMode) debugPrint('Response body: ${response.body}');
 
   if (status == 200) {
     savetoken(data["access_token"]);
