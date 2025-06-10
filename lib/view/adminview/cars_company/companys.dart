@@ -1,7 +1,6 @@
 import 'package:car_x/control/companys/add_company_controller.dart';
 import 'package:car_x/moudle/admin/add_car_comp.dart';
 import 'package:car_x/moudle/user_moudle/logoutconn.dart';
-import 'package:car_x/view/adminview/admindashbord/admindash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
