@@ -1,0 +1,75 @@
+import 'dart:convert';
+import 'package:car_x/control/user_controller/logincontroller.dart';
+
+import 'package:car_x/moudle/user_moudle/token.dart';
+import 'package:car_x/view/cars/addcar/addcarcontroller.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+var data;
+Future<void> loginco() async {
+  addcarcontrol controller1 = Get.put(
+    addcarcontrol(),
+  );
+  Userlogincontroler controller =
+      Get.put(Userlogincontroler(), permanent: true);
+
+  var url = Uri.parse('http://10.0.2.2:8000/api/login');
+
+  var response = await http.post(url, body: {
+    'mobile': controller.phonenumber,
+    'password': controller.password
+  });
+  var status = response.statusCode;
+  data = jsonDecode(response.body);
+  print('Response status: ${response.statusCode}');
+  print('Response body: ${response.body}');
+
+  if (status == 200) {
+    savetoken(data["access_token"]);
+    saveper(data["Permission"]);
+    var per;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    per = prefs.getString("per");
+
+    if (per == "Customer") {
+      savetoken(data["access_token"]);
+      Get.toNamed("/dashbord");
+    } else if (per == "Admin") {
+      Get.toNamed("/admindashbord");
+    } else if (per == "Company Director") {
+      saveemployeetoken(data["access_token"]);
+      Get.toNamed("/manegerdashbord");
+    } else if (per == "Employee") {
+      savecaremployeetoken(data["access_token"]);
+      Get.toNamed("/employeedashbord");
+    } else if (per == "Salesman") {
+      savecarpartemployeetoken(data["access_token"]);
+      Get.toNamed("/salemandashbord");
+    } else if (per == "Workshop Owner") {
+      saveworkshoptoken(data["access_token"]);
+      Get.toNamed("/workdashbord");
+    }
+  } else if (response.body.contains("error")) {
+    Get.rawSnackbar(
+      titleText: Text(
+        'تأكد من رقم الهاتف او كلمة المرور',
+        style: TextStyle(
+            color: Color(0xFFC91F1F),
+            fontSize: 23,
+            fontFamily: 'Cairo-Regular'),
+      ),
+      messageText: LottieBuilder.asset(
+        "assets/images/94303-failed.json",
+        width: 130,
+        height: 130,
+        repeat: false,
+      ),
+      duration: Duration(seconds: 2),
+      backgroundColor: Colors.white38,
+    );
+  }
+}
