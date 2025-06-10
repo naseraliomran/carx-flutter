@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:io';
 import 'package:car_x/view/addcarpartuser/addcarpartcontroller.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +12,7 @@ addcarpartusercontrol controller = Get.put(
 );
 var token = controller.token;
 uplodeimagepartuserconn() async {
-  var uri = Uri.parse('http://10.0.2.2:8000/api/User/Parts/save');
+  var uri = Uri.parse('${ApiConfig.baseUrl}/api/User/Parts/save');
   http.MultipartRequest request = http.MultipartRequest('POST', uri);
   var headers = {
     'Authorization': 'Bearer $token',
@@ -35,7 +37,7 @@ uplodeimagepartuserconn() async {
   var response = await request.send();
 
   var status = response.statusCode;
-  print('Response status: ${response.statusCode}');
+  if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
   if (status == 200) {
     Get.rawSnackbar(
       barBlur: 3,
@@ -57,7 +59,7 @@ uplodeimagepartuserconn() async {
       backgroundColor: Colors.transparent,
     );
   } else if (status == 500) {
-    print(response.reasonPhrase);
+    if (kDebugMode) debugPrint(response.reasonPhrase);
     Get.rawSnackbar(
       titleText: Text(
         "اضف صور للقطعة",

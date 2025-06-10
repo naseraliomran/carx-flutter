@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/view/addcarpart/addcarpartcontroller.dart';
 import 'package:car_x/view/addcarpart/carpartview/deletecarpart.dart';
 import 'package:car_x/view/addcarpart/carpartview/salequancontroller.dart';
@@ -38,7 +40,7 @@ class viewimagecarpart extends StatelessWidget {
                             children: [
                               Container(
                                   child: Image.network(
-                                      "http://10.0.2.2:8000/images/CarPartsPictures/" +
+                                      "${ApiConfig.baseUrl}/images/CarPartsPictures/" +
                                           (controller2.data[index]['imagPart']
                                               .toString()))),
                               Row(

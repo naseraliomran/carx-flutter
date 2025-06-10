@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/view/addempl/viewemployee/viewemployeecontroler.dart';
 import 'package:car_x/view/addstore/viewemployee/viewstorescontroler.dart';
 import 'package:flutter/material.dart';
@@ -11,15 +13,15 @@ Future<void> deletstoreconn() async {
   );
   var token = controller.token;
   var ids = controller.id;
-  var url = Uri.parse('http://10.0.2.2:8000/api/Store/deleteStore/$ids');
+  var url = Uri.parse('${ApiConfig.baseUrl}/api/Store/deleteStore/$ids');
   var response = await http.delete(
     url,
     headers: {"Accept": "application/json", "Authorization": "Bearer $token"},
   );
 
   var status = response.statusCode;
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+  if (kDebugMode) debugPrint('Response body: ${response.body}');
   if (status == 200) {
     Get.rawSnackbar(
       barBlur: 2,

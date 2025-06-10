@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/control/view_company/view_companys.dart';
 import 'package:flutter/material.dart';
 
@@ -10,14 +12,14 @@ viewcopmanycontroller controller = Get.put(
 );
 var ids = controller.id;
 Future<void> unfrezzcompconn() async {
-  var url = Uri.parse('http://10.0.2.2:8000/api/Company/unfreezeBrand/$ids');
+  var url = Uri.parse('${ApiConfig.baseUrl}/api/Company/unfreezeBrand/$ids');
   var response = await http.post(
     url,
   );
 
   var status = response.statusCode;
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+  if (kDebugMode) debugPrint('Response body: ${response.body}');
   if (status == 200) {
     Get.rawSnackbar(
       barBlur: 2,

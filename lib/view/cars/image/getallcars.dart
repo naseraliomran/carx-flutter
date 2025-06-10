@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -25,7 +27,7 @@ class getallcarcontroller extends GetxController {
   var detaildata;
   Future getallcars() async {
     update();
-    var url = Uri.parse('http://10.0.2.2:8000/api/Car/getAll');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/Car/getAll');
     var response = await http.get(url, headers: {
       'Authorization': 'Bearer $token',
       "Connection": "Keep-Alive",

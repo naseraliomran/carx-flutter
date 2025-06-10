@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -22,15 +24,15 @@ class viewcopmanycontroller extends GetxController {
   List data = [];
 
   Future<void> getallcompany() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/Company/getAll');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/Company/getAll');
 
     var response = await http.get(
       url,
     );
     var status = response.statusCode;
     data = jsonDecode(response.body);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+    if (kDebugMode) debugPrint('Response body: ${response.body}');
 
     if (status == 200) {
     } else {}

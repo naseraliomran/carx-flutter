@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -7,7 +8,7 @@ class addsalemancontroler extends GetxController {
   Future<void> onInit() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString("emplotoken");
-    print(token);
+    if (kDebugMode) debugPrint(token);
     super.onInit();
   }
 

@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/view/cars/image/deletecarimag.dart';
 import 'package:car_x/view/cars/image/getallcars.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +32,7 @@ class viewimages extends StatelessWidget {
                                   children: [
                                     Container(
                                       child: Image.network(
-                                        "http://10.0.2.2:8000/images/CarPictures/" +
+                                        "${ApiConfig.baseUrl}/images/CarPictures/" +
                                             (controller2.imagecar[index]
                                                     ['imageName']
                                                 .toString()),

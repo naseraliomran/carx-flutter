@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 import 'package:car_x/view/requestment/viewavworkshop.dart';
 import 'package:geolocator/geolocator.dart';
@@ -138,7 +140,7 @@ class getallmentreqcontroller extends GetxController {
     token = prefs.getString("token");
     await getallmentreqconn();
     update();
-    print(token);
+    if (kDebugMode) debugPrint(token);
     super.onInit();
   }
 
@@ -151,7 +153,7 @@ class getallmentreqcontroller extends GetxController {
   List reqx = [];
   Future getallmentreqconn() async {
     var url = Uri.parse(
-        'http://10.0.2.2:8000/api/Customer/Maintenance/myMaintenanceRequest');
+        '${ApiConfig.baseUrl}/api/Customer/Maintenance/myMaintenanceRequest');
     var response = await http.get(url, headers: {
       'Authorization': 'Bearer $token',
       "Connection": "Keep-Alive",
@@ -161,7 +163,7 @@ class getallmentreqcontroller extends GetxController {
     data = json.decode(response.body);
     if (status == 200) {
       reqx = data;
-      print(data);
+      if (kDebugMode) debugPrint(data);
       update();
     }
   }
@@ -169,7 +171,7 @@ class getallmentreqcontroller extends GetxController {
   var data2;
   Future sendreqconn() async {
     var url = Uri.parse(
-        'http://10.0.2.2:8000/api/Customer/Maintenance/sendRequest/$woid');
+        '${ApiConfig.baseUrl}/api/Customer/Maintenance/sendRequest/$woid');
     var response = await http.post(url, headers: {
       'Authorization': 'Bearer $token',
       "Connection": "Keep-Alive",
@@ -181,7 +183,7 @@ class getallmentreqcontroller extends GetxController {
     refresh();
     var status = response.statusCode;
 
-    print(status);
+    if (kDebugMode) debugPrint(status);
     if (response.body.isNotEmpty) {
       Get.rawSnackbar(
         barBlur: 3,
@@ -210,7 +212,7 @@ class getallmentreqcontroller extends GetxController {
   var data3;
   Future deletereqconn() async {
     var url = Uri.parse(
-        'http://10.0.2.2:8000/api/Customer/Maintenance/deleteRequest/$id');
+        '${ApiConfig.baseUrl}/api/Customer/Maintenance/deleteRequest/$id');
     var response = await http.delete(url, headers: {
       'Authorization': 'Bearer $token',
       "Connection": "Keep-Alive",
@@ -219,7 +221,7 @@ class getallmentreqcontroller extends GetxController {
     var status = response.statusCode;
     data3 = json.decode(response.body);
     if (status == 200) {
-      print(data3);
+      if (kDebugMode) debugPrint(data3);
       Get.rawSnackbar(
         barBlur: 3,
         titleText: Text(
@@ -273,7 +275,7 @@ class getallmentreqcontroller extends GetxController {
       currentPosition = position;
       update();
     }).catchError((e) {
-      print(e);
+      if (kDebugMode) debugPrint(e);
     });
   }
 }

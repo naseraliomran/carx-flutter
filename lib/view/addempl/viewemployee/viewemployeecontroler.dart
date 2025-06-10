@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 import 'package:car_x/view/addempl/viewemployee/viewemployee.dart';
 import 'package:get/get.dart';
@@ -24,7 +26,7 @@ class viewemployeecontroller extends GetxController {
   List data = [];
 
   Future<void> getallemployee() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/Employee/getAll');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/Employee/getAll');
 
     var response = await http.get(
       url,
@@ -34,8 +36,8 @@ class viewemployeecontroller extends GetxController {
 
     data = jsonDecode(response.body);
 
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+    if (kDebugMode) debugPrint('Response body: ${response.body}');
 
     if (status == 200) {
       Get.to(() => viewemployee());

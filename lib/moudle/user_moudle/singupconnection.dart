@@ -1,14 +1,16 @@
 import 'package:car_x/control/user_controller/singupcontroller.dart';
+import 'package:car_x/config/api_config.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
 
 Future<void> singupco() async {
   Usersignupcontroler controller = Get.put(
     Usersignupcontroler(),
   );
-  var url = Uri.parse('http://10.0.2.2:8000/api/register');
+  var url = Uri.parse('${ApiConfig.baseUrl}/api/register');
   var response = await http.post(url, body: {
     'name': controller.username,
     'mobile': controller.phonenumber,
@@ -19,8 +21,10 @@ Future<void> singupco() async {
   });
 
   var status = response.statusCode;
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  if (kDebugMode) {
+    debugPrint('Response status: ${response.statusCode}');
+    debugPrint('Response body: ${response.body}');
+  }
   if (response.body.contains("Authenticate")) {
     Get.rawSnackbar(
       messageText: LottieBuilder.asset(

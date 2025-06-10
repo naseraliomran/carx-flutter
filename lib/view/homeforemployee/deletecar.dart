@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/view/cars/image/getallcars.dart';
 import 'package:car_x/view/home/getallmycar.dart';
 import 'package:car_x/view/home/getallusercars.dart';
@@ -32,11 +34,11 @@ class deletecar extends GetxController {
   deletecarconn() async {
     var ids = controller1.id;
 
-    var uri = Uri.parse('http://10.0.2.2:8000/api/Car/delete/${ids}');
+    var uri = Uri.parse('${ApiConfig.baseUrl}/api/Car/delete/${ids}');
     var response = await http.delete(
       uri,
     );
-    print(response.body);
+    if (kDebugMode) debugPrint(response.body);
     if (response.statusCode == 200) {
       Get.rawSnackbar(
         barBlur: 2,
@@ -63,11 +65,11 @@ class deletecar extends GetxController {
   deletemycarconn() async {
     var ids = controller.id;
 
-    var uri = Uri.parse('http://10.0.2.2:8000/api/Car/delete/${ids}');
+    var uri = Uri.parse('${ApiConfig.baseUrl}/api/Car/delete/${ids}');
     var response = await http.delete(
       uri,
     );
-    print(response.body);
+    if (kDebugMode) debugPrint(response.body);
     if (response.statusCode == 200) {
       Get.rawSnackbar(
         barBlur: 2,
@@ -94,11 +96,11 @@ class deletecar extends GetxController {
   deletecarsellconn() async {
     var ids = controller2.id;
 
-    var uri = Uri.parse('http://10.0.2.2:8000/api/Car/delete/${ids}');
+    var uri = Uri.parse('${ApiConfig.baseUrl}/api/Car/delete/${ids}');
     var response = await http.delete(
       uri,
     );
-    print(response.body);
+    if (kDebugMode) debugPrint(response.body);
     if (response.statusCode == 200) {
       Get.rawSnackbar(
         barBlur: 2,
@@ -125,11 +127,11 @@ class deletecar extends GetxController {
   deletecarsoldconn() async {
     var ids = controller3.id;
 
-    var uri = Uri.parse('http://10.0.2.2:8000/api/Car/delete/${ids}');
+    var uri = Uri.parse('${ApiConfig.baseUrl}/api/Car/delete/${ids}');
     var response = await http.delete(
       uri,
     );
-    print(response.body);
+    if (kDebugMode) debugPrint(response.body);
     if (response.statusCode == 200) {
       Get.rawSnackbar(
         barBlur: 2,
@@ -156,11 +158,11 @@ class deletecar extends GetxController {
   deletecarrentconn() async {
     var ids = controller4.id;
 
-    var uri = Uri.parse('http://10.0.2.2:8000/api/Car/delete/${ids}');
+    var uri = Uri.parse('${ApiConfig.baseUrl}/api/Car/delete/${ids}');
     var response = await http.delete(
       uri,
     );
-    print(response.body);
+    if (kDebugMode) debugPrint(response.body);
     if (response.statusCode == 200) {
       Get.rawSnackbar(
         barBlur: 2,
@@ -187,11 +189,11 @@ class deletecar extends GetxController {
   deletecarrentedconn() async {
     var ids = controller5.id;
 
-    var uri = Uri.parse('http://10.0.2.2:8000/api/Car/delete/${ids}');
+    var uri = Uri.parse('${ApiConfig.baseUrl}/api/Car/delete/${ids}');
     var response = await http.delete(
       uri,
     );
-    print(response.body);
+    if (kDebugMode) debugPrint(response.body);
     if (response.statusCode == 200) {
       Get.rawSnackbar(
         barBlur: 2,

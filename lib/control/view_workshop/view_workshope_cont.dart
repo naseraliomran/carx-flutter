@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -17,15 +19,15 @@ class viewworkshopcontroller extends GetxController {
   var id;
   List data = [];
   Future<void> getallworkshop() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/Workshop/getAll');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/Workshop/getAll');
 
     var response = await http.get(
       url,
     );
     var status = response.statusCode;
     responce(response);
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+    if (kDebugMode) debugPrint('Response body: ${response.body}');
     update();
   }
 

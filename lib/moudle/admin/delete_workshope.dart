@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/control/view_workshop/view_workshope_cont.dart';
 import 'package:car_x/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +13,14 @@ Future<void> deleteworkshopconn() async {
     viewworkshopcontroller(),
   );
   var ids = controller.id;
-  var url = Uri.parse('http://10.0.2.2:8000/api/Workshop/delete/$ids');
+  var url = Uri.parse('${ApiConfig.baseUrl}/api/Workshop/delete/$ids');
   var response = await http.delete(
     url,
   );
 
   var status = response.statusCode;
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+  if (kDebugMode) debugPrint('Response body: ${response.body}');
   if (status == 200) {
     Get.rawSnackbar(
       barBlur: 2,

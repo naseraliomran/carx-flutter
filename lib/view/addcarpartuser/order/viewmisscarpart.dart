@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 import 'package:car_x/view/addcarpart/carpartview/viwecarpartconn.dart';
 import 'package:car_x/view/addcarpartuser/order/viewmyorder.dart';
@@ -39,7 +41,7 @@ class viewallmisscarpart extends StatelessWidget {
                               child: Column(children: [
                                 Container(
                                     child: Image.network(
-                                        "http://10.0.2.2:8000/images/CarPartsPictures/" +
+                                        "${ApiConfig.baseUrl}/images/CarPartsPictures/" +
                                             (controller.data[index]['imagPart']
                                                 .toString()))),
                                 Column(
@@ -138,7 +140,7 @@ class getallmisscarpart extends GetxController {
   var id;
   Future getallmisscarpartconn() async {
     var url =
-        Uri.parse('http://10.0.2.2:8000/api/Customer/Order/allMissingCarParts');
+        Uri.parse('${ApiConfig.baseUrl}/api/Customer/Order/allMissingCarParts');
     var response = await http.get(url, headers: {
       'Authorization': 'Bearer $token',
       "Connection": "Keep-Alive",
@@ -147,7 +149,7 @@ class getallmisscarpart extends GetxController {
     data = json.decode(response.body);
     if (status == 200) {
       item = data;
-      print(data);
+      if (kDebugMode) debugPrint(data);
       update();
     }
   }
@@ -155,7 +157,7 @@ class getallmisscarpart extends GetxController {
   var data2;
   Future sendorder() async {
     var url = Uri.parse(
-        'http://10.0.2.2:8000/api/Customer/Order/sendOrder/$carpartid/$storeid');
+        '${ApiConfig.baseUrl}/api/Customer/Order/sendOrder/$carpartid/$storeid');
     var response = await http.get(url, headers: {
       'Authorization': 'Bearer $token',
       "Connection": "Keep-Alive",
@@ -164,7 +166,7 @@ class getallmisscarpart extends GetxController {
     var status = response.statusCode;
     data2 = json.decode(response.body);
     if (status == 200) {
-      print(data2);
+      if (kDebugMode) debugPrint(data2);
       Get.rawSnackbar(
         barBlur: 3,
         titleText: Text(

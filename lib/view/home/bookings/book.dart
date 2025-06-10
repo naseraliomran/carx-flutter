@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 
 import 'package:car_x/moudle/user_moudle/loginconnection.dart';
@@ -29,7 +31,7 @@ class booking extends GetxController {
   var token;
   var datac;
   Future sendbooking() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/User/Booking/bookingCar/$id');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/User/Booking/bookingCar/$id');
     var response = await http.post(
       url,
       headers: {
@@ -40,8 +42,8 @@ class booking extends GetxController {
 
     var status = response.statusCode;
     datac = jsonDecode(response.body);
-    print(response.body);
-    print(status);
+    if (kDebugMode) debugPrint(response.body);
+    if (kDebugMode) debugPrint(status);
 
     if (data.toString().contains('false')) {
       Get.rawSnackbar(
@@ -112,7 +114,7 @@ class booking extends GetxController {
 
   Future cancelebooking() async {
     var url = Uri.parse(
-        'http://10.0.2.2:8000/api/User/Booking/cancellationOfBooking/$id');
+        '${ApiConfig.baseUrl}/api/User/Booking/cancellationOfBooking/$id');
     var response = await http.post(
       url,
       headers: {
@@ -123,7 +125,7 @@ class booking extends GetxController {
 
     var status = response.statusCode;
     var datax = response.body;
-    print(status);
+    if (kDebugMode) debugPrint(status);
     if (data.toString().contains('false')) {
       Get.rawSnackbar(
         barBlur: 3,
@@ -145,7 +147,7 @@ class booking extends GetxController {
         backgroundColor: Colors.transparent,
       );
     } else {
-      print(datax);
+      if (kDebugMode) debugPrint(datax);
       Get.rawSnackbar(
         barBlur: 3,
         titleText: Text(
@@ -177,7 +179,7 @@ class booking extends GetxController {
   var data1;
   var data2;
   Future mybooking() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/User/Booking/myBookings');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/User/Booking/myBookings');
     var response = await http.get(
       url,
       headers: {
@@ -190,11 +192,11 @@ class booking extends GetxController {
     data = json.decode(response.body);
     item = data;
 
-    print(data);
+    if (kDebugMode) debugPrint(data);
   }
 
   Future rentbooking() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/User/Booking/soldBookings');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/User/Booking/soldBookings');
     var response = await http.get(
       url,
       headers: {
@@ -207,11 +209,11 @@ class booking extends GetxController {
     data1 = json.decode(response.body);
     item1 = data1;
     update();
-    print(data1);
+    if (kDebugMode) debugPrint(data1);
   }
 
   Future soldbooking() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/User/Booking/soldBookings');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/User/Booking/soldBookings');
     var response = await http.get(
       url,
       headers: {
@@ -224,12 +226,12 @@ class booking extends GetxController {
     data2 = json.decode(response.body);
     item2 = data2;
     update();
-    print(data2);
+    if (kDebugMode) debugPrint(data2);
   }
 
   Future conformreq() async {
     var url =
-        Uri.parse('http://10.0.2.2:8000/api/User/Booking/confirmRequest/$id');
+        Uri.parse('${ApiConfig.baseUrl}/api/User/Booking/confirmRequest/$id');
     var response = await http.get(
       url,
       headers: {
@@ -241,7 +243,7 @@ class booking extends GetxController {
     var status = response.statusCode;
 
     update();
-    print(status);
+    if (kDebugMode) debugPrint(status);
     if (status == 200) {
       Get.rawSnackbar(
         barBlur: 3,
@@ -267,7 +269,7 @@ class booking extends GetxController {
 
   Future rejectreq() async {
     var url =
-        Uri.parse('http://10.0.2.2:8000/api/User/Booking/rejectionBooking/$id');
+        Uri.parse('${ApiConfig.baseUrl}/api/User/Booking/rejectionBooking/$id');
     var response = await http.get(
       url,
       headers: {
@@ -279,7 +281,7 @@ class booking extends GetxController {
     var status = response.statusCode;
 
     update();
-    print(status);
+    if (kDebugMode) debugPrint(status);
     if (status == 200) {
       Get.rawSnackbar(
         barBlur: 3,

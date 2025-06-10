@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,7 +23,7 @@ class logoutcontroller extends GetxController {
   var token;
 
   logoutco() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/logout');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/logout');
     var response =
         await http.post(url, headers: {'Authorization': 'Bearer $token'});
     var status = response.statusCode;
@@ -29,7 +31,7 @@ class logoutcontroller extends GetxController {
     if (status == 200) {
       Get.offAllNamed("signup");
 
-      print(data);
+      if (kDebugMode) debugPrint(data);
     }
   }
 }

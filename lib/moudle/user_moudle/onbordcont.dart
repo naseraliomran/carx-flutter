@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:car_x/control/user_controller/logincontroller.dart';
 
 import 'package:get/get.dart';
@@ -10,8 +11,8 @@ class onbordco extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString("token");
     per = prefs.getString("per");
-    print(token);
-    print(per);
+    if (kDebugMode) debugPrint(token);
+    if (kDebugMode) debugPrint(per);
     super.onInit();
   }
 

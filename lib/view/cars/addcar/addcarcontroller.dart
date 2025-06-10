@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +10,7 @@ class addcarcontrol extends GetxController {
   Future<void> onInit() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString("caremptoken");
-    print(token);
+    if (kDebugMode) debugPrint(token);
     super.onInit();
   }
 
@@ -47,7 +48,7 @@ class addcarcontrol extends GetxController {
       image!.addAll(_image!);
     }
     for (var i = 0; i < image!.length; i++) {
-      print(image![i].path.toString().split('/').last);
+      if (kDebugMode) debugPrint(image![i].path.toString().split('/').last);
     }
   }
 }

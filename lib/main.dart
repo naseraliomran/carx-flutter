@@ -1,5 +1,7 @@
 import 'package:car_x/theme/theme.dart';
 import 'package:car_x/view/adminview/admindashbord/admindash.dart';
+import 'package:car_x/view/adminview/admindashbord/manage_companies.dart';
+import 'package:car_x/view/adminview/admindashbord/manage_workshops.dart';
 import 'package:car_x/view/adminview/cars_company/companys.dart';
 import 'package:car_x/view/adminview/view_cars_comp/view_companys.dart';
 import 'package:car_x/view/adminview/view_workshops/view_workshop.dart';
@@ -40,6 +42,8 @@ class Myapp extends StatelessWidget {
         GetPage(name: "/buypage", page: () => buypage()),
         GetPage(name: "/dashbord", page: () => dashbord()),
         GetPage(name: "/admindashbord", page: () => admindashbord()),
+        GetPage(name: "/companymanager", page: () => ManageCompanies()),
+        GetPage(name: "/workshopmanager", page: () => ManageWorkshops()),
         GetPage(name: "/companys", page: () => companys()),
         GetPage(name: "/viewcompanys", page: () => viewcompanys()),
         GetPage(name: "/workshop", page: () => workshop()),

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +10,7 @@ class addcarpartusercontrol extends GetxController {
   Future<void> onInit() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString("token");
-    print(token);
+    if (kDebugMode) debugPrint(token);
 
     super.onInit();
   }
