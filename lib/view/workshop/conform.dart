@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/view/workshop/mapment.dart';
 import 'package:car_x/view/workshop/mentview.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +88,7 @@ class getallconformcontroller extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString("worktoken");
     getallconformconn();
-    print(token);
+    if (kDebugMode) debugPrint(token);
     super.onInit();
   }
 
@@ -98,7 +100,7 @@ class getallconformcontroller extends GetxController {
   List requ = [];
   Future getallconformconn() async {
     var url = Uri.parse(
-        'http://10.0.2.2:8000/api/WorkShop/Maintenance/getMyConfirmedRequest');
+        '${ApiConfig.baseUrl}/api/WorkShop/Maintenance/getMyConfirmedRequest');
     var response = await http.get(url, headers: {
       'Authorization': 'Bearer $token',
       "Connection": "Keep-Alive",
@@ -112,7 +114,7 @@ class getallconformcontroller extends GetxController {
         requ = data;
       }
 
-      print(data);
+      if (kDebugMode) debugPrint(data);
       update();
     }
   }

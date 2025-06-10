@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 import 'package:car_x/view/requestment/requestment.dart';
 import 'package:http/http.dart' as http;
@@ -232,7 +234,7 @@ class viewavworkshops extends GetxController {
     token = prefs.getString("token");
     await viewavworkshop();
     update();
-    print(token);
+    if (kDebugMode) debugPrint(token);
     super.onInit();
   }
 
@@ -245,7 +247,7 @@ class viewavworkshops extends GetxController {
 
   Future viewavworkshop() async {
     var url =
-        Uri.parse('http://10.0.2.2:8000/api/Customer/Maintenance/getWorkShops');
+        Uri.parse('${ApiConfig.baseUrl}/api/Customer/Maintenance/getWorkShops');
     var response = await http.get(url, headers: {
       'Authorization': 'Bearer $token',
       "Connection": "Keep-Alive",
@@ -257,7 +259,7 @@ class viewavworkshops extends GetxController {
       if (response.body.toString().contains('no')) {
       } else {
         data = json.decode(response.body);
-        print(data);
+        if (kDebugMode) debugPrint(data);
       }
       update();
     }

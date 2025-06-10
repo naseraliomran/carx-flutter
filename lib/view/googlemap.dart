@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'dart:async';
 import 'package:car_x/control/worksope/workshope_controller.dart'; // Assuming this path is correct
 import 'package:flutter/material.dart';
@@ -91,7 +92,7 @@ class MapSampleState extends State<MapSample> {
           _errorMessage = e.toString();
         });
       }
-      print("Error initializing map: $e");
+      if (kDebugMode) debugPrint("Error initializing map: $e");
     }
   }
 
@@ -112,14 +113,14 @@ class MapSampleState extends State<MapSample> {
                 long = draggedLatLng.longitude;
               });
             }
-            print("Marker dragged to: $draggedLatLng");
+            if (kDebugMode) debugPrint("Marker dragged to: $draggedLatLng");
           },
           icon: BitmapDescriptor.defaultMarkerWithHue(
               BitmapDescriptor.hueAzure), // Custom marker color
         )
       ];
     });
-    print("Tapped at: $point");
+    if (kDebugMode) debugPrint("Tapped at: $point");
   }
 
   void _goToCurrentUserLocation() {

@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 
 import 'package:car_x/view/addsaleman/viewsaleman/viewesaleman.dart';
@@ -26,7 +28,7 @@ class viewesaleecontroller extends GetxController {
 
   var id;
   Future<void> getallsaleman() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/Salesman/getSalesman/$id');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/Salesman/getSalesman/$id');
 
     var response = await http.get(
       url,
@@ -36,8 +38,8 @@ class viewesaleecontroller extends GetxController {
 
     data = jsonDecode(response.body);
 
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+    if (kDebugMode) debugPrint('Response body: ${response.body}');
 
     if (status == 200) {
       Get.to(() => viewsaleman());

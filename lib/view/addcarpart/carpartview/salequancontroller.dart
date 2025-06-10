@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/view/addcarpart/addcarpartcontroller.dart';
 import 'package:car_x/view/addcarpart/carpartview/viwecarpartconn.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,7 @@ class saleqcarpartcontrol extends GetxController {
   Future<void> salequant() async {
     var token = controller.token;
     var id = controller1.id;
-    var url = Uri.parse('http://10.0.2.2:8000/api/Parts/Sale/$id');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/Parts/Sale/$id');
     var response = await http.post(url, headers: {
       "Accept": "application/json",
       "Authorization": "Bearer $token"
@@ -26,8 +28,8 @@ class saleqcarpartcontrol extends GetxController {
     });
 
     var status = response.statusCode;
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+    if (kDebugMode) debugPrint('Response body: ${response.body}');
     if (status == 200) {
       update();
       Get.back();

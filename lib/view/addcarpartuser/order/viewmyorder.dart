@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -40,7 +42,7 @@ class viewmyorder extends StatelessWidget {
                                             ? Image.network(
                                                 'https://www.gamian.eu/?attachment_id=72')
                                             : Image.network(
-                                                "http://10.0.2.2:8000/images/CarPartsPictures/" +
+                                                "${ApiConfig.baseUrl}/images/CarPartsPictures/" +
                                                     (controller.data[index]
                                                             ['car_parts']
                                                             ['imagPart']
@@ -140,7 +142,7 @@ class vieworder extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString("token");
     viewmyorderconn();
-    print(token);
+    if (kDebugMode) debugPrint(token);
     super.onInit();
   }
 
@@ -151,7 +153,7 @@ class vieworder extends GetxController {
   var id;
   List part = [];
   Future viewmyorderconn() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/Customer/Order/myOrder');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/Customer/Order/myOrder');
     var response = await http.get(url, headers: {
       'Authorization': 'Bearer $token',
       "Connection": "Keep-Alive",
@@ -161,7 +163,7 @@ class vieworder extends GetxController {
     data = json.decode(response.body);
     if (status == 200) {
       part = data;
-      print(data);
+      if (kDebugMode) debugPrint(data);
       update();
     }
   }
@@ -169,7 +171,7 @@ class vieworder extends GetxController {
   var data2;
   Future deleteorder() async {
     var url =
-        Uri.parse('http://10.0.2.2:8000/api/Customer/Order/deleteOrder/$id');
+        Uri.parse('${ApiConfig.baseUrl}/api/Customer/Order/deleteOrder/$id');
     var response = await http.delete(url, headers: {
       'Authorization': 'Bearer $token',
       "Connection": "Keep-Alive",
@@ -197,7 +199,7 @@ class vieworder extends GetxController {
         duration: Duration(seconds: 2),
         backgroundColor: Colors.transparent,
       );
-      print(data2);
+      if (kDebugMode) debugPrint(data2);
       update();
     }
   }

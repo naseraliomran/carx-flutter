@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/view/cars/image/getallcars.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,14 +25,14 @@ class deleteimagecontroller extends GetxController {
   deleteimageconn() async {
     var ids = controller1.id;
     var imagename = controller1.imagename;
-    var uri = Uri.parse('http://10.0.2.2:8000/api/Car/deleteimage/${ids}');
+    var uri = Uri.parse('${ApiConfig.baseUrl}/api/Car/deleteimage/${ids}');
     var response = await http.post(uri, headers: {
       "Accept": "application/json",
       "Authorization": "Bearer $token"
     }, body: {
       'imageName': imagename,
     });
-    print(response.body);
+    if (kDebugMode) debugPrint(response.body);
     if (response.statusCode == 200) {
       Get.rawSnackbar(
         barBlur: 2,

@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/control/view_company/view_companys.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,14 +12,14 @@ Future<void> deletecompconn() async {
   );
   var ids = controller.id;
   var url =
-      Uri.parse('http://10.0.2.2:8000/api/Company/deleteCompanyDirector/$ids');
+      Uri.parse('${ApiConfig.baseUrl}/api/Company/deleteCompanyDirector/$ids');
   var response = await http.delete(
     url,
   );
 
   var status = response.statusCode;
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+  if (kDebugMode) debugPrint('Response body: ${response.body}');
   if (status == 404) {
     Get.rawSnackbar(
       barBlur: 2,

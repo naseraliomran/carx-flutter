@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/view/addempl/viewemployee/viewemployeecontroler.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,15 +12,15 @@ Future<void> deletemployconn() async {
   );
   var token = controller.token;
   var ids = controller.id;
-  var url = Uri.parse('http://10.0.2.2:8000/api/Employee/delete/$ids');
+  var url = Uri.parse('${ApiConfig.baseUrl}/api/Employee/delete/$ids');
   var response = await http.delete(
     url,
     headers: {"Accept": "application/json", "Authorization": "Bearer $token"},
   );
 
   var status = response.statusCode;
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+  if (kDebugMode) debugPrint('Response body: ${response.body}');
   if (status == 200) {
     Get.rawSnackbar(
       barBlur: 2,

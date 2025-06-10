@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -9,7 +11,7 @@ class rentmycar extends GetxController {
   var bookingPeriod;
   var id;
   Future<void> myrentcarconn() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/User/Car/carRental/$id');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/User/Car/carRental/$id');
     var response = await http.post(url, body: {
       'tenantName': tenantName,
       'tenantPhoneNumber': tenantPhoneNumber,
@@ -17,7 +19,7 @@ class rentmycar extends GetxController {
     });
 
     var status = response.statusCode;
-    print(response.body);
+    if (kDebugMode) debugPrint(response.body);
     if (status == 200) {
       Get.rawSnackbar(
         barBlur: 2,

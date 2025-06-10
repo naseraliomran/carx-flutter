@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 
 import 'package:car_x/moudle/admin/frezz.dart';
@@ -281,7 +283,7 @@ class searchbar extends GetxController {
   List imagecardetail = [];
   var detaildata;
   Future searchconn() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/Car/search');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/Car/search');
     var response = await http.post(url, body: {
       'name': name,
       'manufacturingYear': manufacturingYear,
@@ -295,9 +297,9 @@ class searchbar extends GetxController {
     car = data;
     if (response.statusCode == 200) {
       update();
-      print(data);
+      if (kDebugMode) debugPrint(data);
     } else {
-      print(response.reasonPhrase);
+      if (kDebugMode) debugPrint(response.reasonPhrase);
     }
   }
 }

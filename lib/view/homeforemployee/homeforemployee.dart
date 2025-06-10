@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/view/cars/image/getallcars.dart';
 import 'package:car_x/view/homeforemployee/bookings/mybooking.dart';
 import 'package:car_x/view/homeforemployee/bookings/rentbooking.dart';
@@ -198,7 +200,7 @@ class Homepageforemployee extends StatelessWidget {
                                   itemBuilder: (context, index, rindex) {
                                     return Container(
                                         child: Image.network(
-                                      "http://10.0.2.2:8000/images/CarPictures/" +
+                                      "${ApiConfig.baseUrl}/images/CarPictures/" +
                                           (controller.imagecar[index]
                                                   ['imageName']
                                               .toString()),

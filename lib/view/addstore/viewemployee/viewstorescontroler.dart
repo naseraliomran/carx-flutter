@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 import 'package:car_x/view/addempl/viewemployee/viewemployee.dart';
 import 'package:car_x/view/addstore/viewemployee/viewestore.dart';
@@ -24,7 +26,7 @@ class viewestorecontroller extends GetxController {
   List data = [];
 
   Future<void> getallstores() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/Store/getAll');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/Store/getAll');
 
     var response = await http.get(
       url,
@@ -34,8 +36,8 @@ class viewestorecontroller extends GetxController {
 
     newMethod(response);
 
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+    if (kDebugMode) debugPrint('Response body: ${response.body}');
 
     if (status == 200) {
       Get.to(() => viewestores());

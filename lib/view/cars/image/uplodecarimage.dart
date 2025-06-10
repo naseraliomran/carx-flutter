@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:io';
 import 'package:car_x/view/cars/addcar/addcarcontroller.dart';
 import 'package:car_x/view/cars/image/getallcars.dart';
@@ -28,7 +30,7 @@ class uplodimagecontroller extends GetxController {
   var token;
   var ids;
   uplodeimageconn() async {
-    var uri = Uri.parse('http://10.0.2.2:8000/api/Car/uploadImage/${ids}');
+    var uri = Uri.parse('${ApiConfig.baseUrl}/api/Car/uploadImage/${ids}');
     http.MultipartRequest request = http.MultipartRequest('POST', uri);
     request.headers['Authorization'] = 'Bearer $token';
     if (controller.image!.isNotEmpty) {
@@ -43,15 +45,15 @@ class uplodimagecontroller extends GetxController {
       var response = await request.send();
 
       if (response.statusCode == 200) {
-        print(await response.stream.bytesToString());
+        if (kDebugMode) debugPrint(await response.stream.bytesToString());
       } else {
-        print(response.reasonPhrase);
+        if (kDebugMode) debugPrint(response.reasonPhrase);
       }
     } else {}
   }
 
   uplodemyimageconn() async {
-    var uri = Uri.parse('http://10.0.2.2:8000/api/Car/uploadImage/${ids}');
+    var uri = Uri.parse('${ApiConfig.baseUrl}/api/Car/uploadImage/${ids}');
     http.MultipartRequest request = http.MultipartRequest('POST', uri);
     request.headers['Authorization'] = 'Bearer $token';
     if (controller2.image!.isNotEmpty) {
@@ -66,9 +68,9 @@ class uplodimagecontroller extends GetxController {
       var response = await request.send();
 
       if (response.statusCode == 200) {
-        print(await response.stream.bytesToString());
+        if (kDebugMode) debugPrint(await response.stream.bytesToString());
       } else {
-        print(response.reasonPhrase);
+        if (kDebugMode) debugPrint(response.reasonPhrase);
       }
     } else {}
   }

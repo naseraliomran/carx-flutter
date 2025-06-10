@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/view/home/bookings/mybooking.dart';
 import 'package:car_x/view/home/bookings/rentbooking.dart';
 import 'package:car_x/view/home/bookings/soldbook.dart';
@@ -172,7 +174,7 @@ class Homepageman extends StatelessWidget {
                                     itemBuilder: (context, index, rindex) {
                                       return Container(
                                           child: Image.network(
-                                        "http://10.0.2.2:8000/images/CarPictures/" +
+                                        "${ApiConfig.baseUrl}/images/CarPictures/" +
                                             (controller.imagecar[index]
                                                     ['imageName']
                                                 .toString()),
@@ -279,7 +281,7 @@ mycars() {
                               itemBuilder: (context, index, rindex) {
                                 return Container(
                                     child: Image.network(
-                                  "http://10.0.2.2:8000/images/CarPictures/" +
+                                  "${ApiConfig.baseUrl}/images/CarPictures/" +
                                       (controller.imagecar[index]['imageName']
                                           .toString()),
                                   fit: BoxFit.fill,

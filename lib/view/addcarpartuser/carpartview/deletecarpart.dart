@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -15,12 +17,12 @@ class deletecarpartuserimagecontroller extends GetxController {
   var token;
   var id;
   deletecarpartuserimageconn() async {
-    var uri = Uri.parse('http://10.0.2.2:8000/api/User/Parts/delete/${id}');
+    var uri = Uri.parse('${ApiConfig.baseUrl}/api/User/Parts/delete/${id}');
     var response = await http.delete(
       uri,
       headers: {"Accept": "application/json", "Authorization": "Bearer $token"},
     );
-    print(response.body);
+    if (kDebugMode) debugPrint(response.body);
     if (response.statusCode == 200) {
       Get.back();
       Get.rawSnackbar(

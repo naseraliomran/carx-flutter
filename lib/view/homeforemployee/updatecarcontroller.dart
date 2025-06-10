@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 
 import 'package:car_x/view/cars/addcar/addcarcontroller.dart';
@@ -36,7 +38,7 @@ class updatecarcontroller extends GetxController {
 
   Future<void> updatecarconn() async {
     var token = controller1.token.toString();
-    var url = Uri.parse('http://10.0.2.2:8000/api/Car/update/$id');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/Car/update/$id');
     var response = await http.post(url, headers: {
       "Accept": "application/json",
       "Authorization": "Bearer $token"
@@ -54,8 +56,8 @@ class updatecarcontroller extends GetxController {
     });
 
     var status = response.statusCode;
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
+    if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+    if (kDebugMode) debugPrint('Response body: ${response.body}');
     var data = json.decode(response.body);
 
     if (status == 200) {

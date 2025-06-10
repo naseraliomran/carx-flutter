@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:car_x/view/searchbar/search.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +46,7 @@ class resultsearch extends StatelessWidget {
                               itemBuilder: (context, index, rindex) {
                                 return Container(
                                     child: Image.network(
-                                  "http://10.0.2.2:8000/images/CarPictures/${controller.data[rindex]['image_car'][rindex]['imageName']}",
+                                  "${ApiConfig.baseUrl}/images/CarPictures/${controller.data[rindex]['image_car'][rindex]['imageName']}",
                                   fit: BoxFit.fill,
                                 ));
                               },

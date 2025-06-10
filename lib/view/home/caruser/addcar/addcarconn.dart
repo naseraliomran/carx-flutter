@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'dart:convert';
 import 'package:car_x/view/cars/image/uplodecarimage.dart';
 import 'package:car_x/view/home/caruser/addcar/addcarcontroller.dart';
@@ -14,7 +16,7 @@ Future<void> addmycarconn() async {
     uplodimagecontroller(),
   );
   var token = controller.token.toString();
-  var url = Uri.parse('http://10.0.2.2:8000/api/User/Car/save');
+  var url = Uri.parse('${ApiConfig.baseUrl}/api/User/Car/save');
   var response = await http.post(url, headers: {
     "Accept": "application/json",
     "Authorization": "Bearer $token"
@@ -33,8 +35,8 @@ Future<void> addmycarconn() async {
   });
 
   var status = response.statusCode;
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+  if (kDebugMode) debugPrint('Response status: ${response.statusCode}');
+  if (kDebugMode) debugPrint('Response body: ${response.body}');
   var data = json.decode(response.body);
   controller1.ids = data["id"];
   if (status == 200) {

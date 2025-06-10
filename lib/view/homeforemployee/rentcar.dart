@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+import 'package:car_x/config/api_config.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -9,7 +11,7 @@ class rentcar extends GetxController {
   var bookingPeriod;
   var id;
   Future<void> rentcarconn() async {
-    var url = Uri.parse('http://10.0.2.2:8000/api/Car/carRental/$id');
+    var url = Uri.parse('${ApiConfig.baseUrl}/api/Car/carRental/$id');
     var response = await http.post(url, body: {
       'tenantName': tenantName,
       'tenantPhoneNumber': tenantPhoneNumber,
