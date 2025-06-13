@@ -5,7 +5,9 @@ class admindashbord extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xfff4f7fc),
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         title: const Text('لوحة تحكم الادمن'),
         centerTitle: true,
       ),
@@ -17,7 +19,12 @@ class admindashbord extends StatelessWidget {
             children: [
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  foregroundColor: Colors.white,
                   minimumSize: const Size(double.infinity, 60),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 onPressed: () {
                   Get.toNamed('/companymanager');
@@ -28,7 +35,12 @@ class admindashbord extends StatelessWidget {
               const SizedBox(height: 20),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  foregroundColor: Colors.white,
                   minimumSize: const Size(double.infinity, 60),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 onPressed: () {
                   Get.toNamed('/workshopmanager');
