@@ -1,4 +1,7 @@
 import 'package:car_x/theme/theme.dart';
+import 'package:car_x/config/translations.dart';
+import 'package:car_x/control/language_controller.dart';
+import 'package:car_x/control/theme_controller.dart';
 import 'package:car_x/view/adminview/admindashbord/admindash.dart';
 import 'package:car_x/view/adminview/admindashbord/manage_companies.dart';
 import 'package:car_x/view/adminview/admindashbord/manage_workshops.dart';
@@ -22,37 +25,51 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Get.put(ThemeController());
+  Get.put(LanguageController());
   runApp(Myapp());
 }
 
 class Myapp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      initialRoute: "/onbord",
-      theme: theme(),
-      debugShowCheckedModeBanner: false,
-      getPages: [
-        GetPage(name: "/onbord", page: () => onbord()),
-        GetPage(name: "/signup", page: () => Signup()),
-        GetPage(name: "/login", page: () => Signin()),
-        GetPage(name: "/homepage", page: () => Homepage()),
-        GetPage(name: "/accountpage", page: () => accountpage()),
-        GetPage(name: "/sellpage", page: () => sellpage()),
-        GetPage(name: "/buypage", page: () => buypage()),
-        GetPage(name: "/dashbord", page: () => dashbord()),
-        GetPage(name: "/admindashbord", page: () => admindashbord()),
-        GetPage(name: "/companymanager", page: () => ManageCompanies()),
-        GetPage(name: "/workshopmanager", page: () => ManageWorkshops()),
-        GetPage(name: "/companys", page: () => companys()),
-        GetPage(name: "/viewcompanys", page: () => viewcompanys()),
-        GetPage(name: "/workshop", page: () => workshop()),
-        GetPage(name: "/viewworkshop", page: () => viewworkshop()),
-        GetPage(name: "/manegerdashbord", page: () => manegerdashbord()),
-        GetPage(name: "/employeedashbord", page: () => addcardashbord()),
-        GetPage(name: "/salemandashbord", page: () => salemandashbord()),
-        GetPage(name: "/workdashbord", page: () => workshopdashbord()),
-      ],
+    final ThemeController themeController = Get.find();
+    final LanguageController languageController = Get.find();
+    return GetBuilder<ThemeController>(
+      builder: (_) => GetBuilder<LanguageController>(
+        builder: (_) => GetMaterialApp(
+          translations: AppTranslations(),
+          locale: languageController.locale,
+          fallbackLocale: const Locale('ar'),
+          theme: lightTheme(),
+          darkTheme: darkTheme(),
+          themeMode: themeController.isDark ? ThemeMode.dark : ThemeMode.light,
+          debugShowCheckedModeBanner: false,
+          initialRoute: '/onbord',
+          getPages: [
+            GetPage(name: '/onbord', page: () => onbord()),
+            GetPage(name: '/signup', page: () => Signup()),
+            GetPage(name: '/login', page: () => Signin()),
+            GetPage(name: '/homepage', page: () => Homepage()),
+            GetPage(name: '/accountpage', page: () => accountpage()),
+            GetPage(name: '/sellpage', page: () => sellpage()),
+            GetPage(name: '/buypage', page: () => buypage()),
+            GetPage(name: '/dashbord', page: () => dashbord()),
+            GetPage(name: '/admindashbord', page: () => admindashbord()),
+            GetPage(name: '/companymanager', page: () => ManageCompanies()),
+            GetPage(name: '/workshopmanager', page: () => ManageWorkshops()),
+            GetPage(name: '/companys', page: () => companys()),
+            GetPage(name: '/viewcompanys', page: () => viewcompanys()),
+            GetPage(name: '/workshop', page: () => workshop()),
+            GetPage(name: '/viewworkshop', page: () => viewworkshop()),
+            GetPage(name: '/manegerdashbord', page: () => manegerdashbord()),
+            GetPage(name: '/employeedashbord', page: () => addcardashbord()),
+            GetPage(name: '/salemandashbord', page: () => salemandashbord()),
+            GetPage(name: '/workdashbord', page: () => workshopdashbord()),
+          ],
+        ),
+      ),
     );
   }
 }
