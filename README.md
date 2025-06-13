@@ -35,3 +35,10 @@ After launching, sign up or log in to explore the various dashboards. Use the me
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## Account Page
+
+- Switch between English and Arabic languages.
+- Toggle light and dark themes with animation.
+- Update your password securely.
+- Change displayed currency between IQD and USD.
