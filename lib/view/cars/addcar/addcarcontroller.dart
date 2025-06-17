@@ -39,16 +39,14 @@ class addcarcontrol extends GetxController {
 
   List<XFile>? image = [];
 
-  var imageforapi;
   Future<void> uploadPhoto() async {
-    imageforapi = File(image.toString());
-    final List<XFile>? _image = (await imagePicker.pickMultiImage());
-    if (image != null) {
+    final List<XFile>? picked = await imagePicker.pickMultiImage();
+    if (picked != null && picked.isNotEmpty) {
+      image!.addAll(picked);
       update();
-      image!.addAll(_image!);
-    }
-    for (var i = 0; i < image!.length; i++) {
-      if (kDebugMode) debugPrint(image![i].path.toString().split('/').last);
+      for (var file in picked) {
+        if (kDebugMode) debugPrint(file.path.split('/').last);
+      }
     }
   }
 }

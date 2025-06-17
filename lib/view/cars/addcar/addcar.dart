@@ -45,56 +45,11 @@ class _addcarpageState extends State<addcarpage> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18.0),
-                          ),
-                          color: Theme.of(context).primaryColor,
-                          elevation: 12,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Container(
-                                height: 140,
-                                width: 240,
-                                child: IconButton(
-                                  onPressed: () {
-                                    Get.defaultDialog(
-                                        title: "اختر من المعرض ",
-                                        titleStyle: const TextStyle(
-                                            color: Color(0xFF000000),
-                                            fontSize: 24,
-                                            fontFamily: 'Cairo-Regular'),
-                                        content: Column(
-                                          children: [
-                                            IconButton(
-                                                onPressed: () {
-                                                  controller.uploadPhoto();
-                                                },
-                                                iconSize: 122,
-                                                icon: LottieBuilder.asset(
-                                                  "assets/images/5704-choose-photo.json",
-                                                )),
-                                          ],
-                                        ));
-                                  },
-                                  icon: LottieBuilder.asset(
-                                    "assets/images/60265-digital-camera.json",
-                                    width: 170,
-                                  ),
-                                ),
-                              ),
-                              const Text(
-                                "اضف صور",
-                                style: TextStyle(
-                                    color: Color(0xFFFFFFFF),
-                                    fontSize: 24,
-                                    fontFamily: 'Cairo-Regular'),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              )
-                            ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 16.0),
+                          child: ElevatedButton(
+                            onPressed: () => controller.uploadPhoto(),
+                            child: const Text('اضف صور'),
                           ),
                         ),
 
