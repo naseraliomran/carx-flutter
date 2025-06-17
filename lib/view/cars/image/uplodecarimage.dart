@@ -12,7 +12,7 @@ class uplodimagecontroller extends GetxController {
   @override
   Future<void> onInit() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    token = prefs.getString("caremptoken");
+    token = prefs.getString("caremptoken") ?? prefs.getString("token");
 
     super.onInit();
   }

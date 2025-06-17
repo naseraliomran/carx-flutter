@@ -28,6 +28,20 @@ The application includes several dashboards for different types of users (admin,
    flutter run
    ```
 
+### Custom API host
+
+The application uses `ApiConfig.baseUrl` (see `lib/config/api_config.dart`) to
+determine the backend server. By default this is
+`http://10.0.2.2:8000` for local development. To point the app at a different
+host, provide an `API_BASE_URL` value when running or building:
+
+```bash
+flutter run --dart-define=API_BASE_URL=https://your-public-host.com
+```
+
+You can pass the same `--dart-define` flag to `flutter build` commands to embed
+your public host in release builds.
+
 ## Usage
 
 After launching, sign up or log in to explore the various dashboards. Use the menus to navigate between features such as car management, workshop locations, and user account settings. The app demonstrates integration with Google Maps as well as a basic multi-user workflow.
