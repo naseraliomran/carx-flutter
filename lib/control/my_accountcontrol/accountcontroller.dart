@@ -10,7 +10,7 @@ class accountcontroller extends GetxController {
   Future<void> onInit() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     token = prefs.getString("token");
-    profileco();
+    await profileco();
 
     super.onInit();
   }
@@ -18,15 +18,14 @@ class accountcontroller extends GetxController {
   var token;
   Map users = {};
 
-  profileco() async {
+  Future<void> profileco() async {
     var url = Uri.parse('${ApiConfig.baseUrl}/api/me');
 
     var response =
-        await http.get(url, headers: {'Authorization': 'Bearer ${token}'});
-    var data = jsonDecode(response.body);
-    var status = response.statusCode;
-    if (status == 200) {
-      users = data;
+        await http.get(url, headers: {'Authorization': 'Bearer $token'});
+    if (response.statusCode == 200) {
+      users = jsonDecode(response.body);
+      update();
     }
   }
 }
