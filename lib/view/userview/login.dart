@@ -2,54 +2,12 @@ import 'package:car_x/control/user_controller/logincontroller.dart';
 import 'package:car_x/moudle/user_moudle/loginconnection.dart'; // Assuming loginco() is used
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
+import 'package:car_x/widgets/input_decoration.dart';
 
 class Signin extends StatelessWidget {
   final Userlogincontroler controller = Get.put(Userlogincontroler());
 
   Signin({super.key});
-
-  InputDecoration _buildTextFieldDecoration({
-    required BuildContext context,
-    required String hintText,
-    required IconData prefixIconData, // Changed name for clarity
-    required Color primaryColor,
-    Widget? suffixIcon,
-  }) {
-    // For RTL, prefixIcon will appear on the right if Directionality is RTL.
-    // Flutter handles this automatically.
-    return InputDecoration(
-      prefixIcon: Icon(prefixIconData, color: primaryColor, size: 22),
-      hintText: hintText,
-      hintStyle: TextStyle(
-          fontFamily: 'Cairo-Regular', fontSize: 15, color: Colors.grey[500]),
-      filled: true,
-      fillColor: Colors.grey[50],
-      contentPadding:
-          const EdgeInsets.symmetric(vertical: 18.0, horizontal: 15.0),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12.0),
-        borderSide: BorderSide(color: Colors.grey[300]!),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12.0),
-        borderSide: BorderSide(color: Colors.grey[300]!),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12.0),
-        borderSide: BorderSide(color: primaryColor, width: 1.5),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12.0),
-        borderSide: const BorderSide(color: Colors.red, width: 1.0),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12.0),
-        borderSide: const BorderSide(color: Colors.red, width: 1.5),
-      ),
-      suffixIcon: suffixIcon,
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,9 +107,8 @@ class Signin extends StatelessWidget {
                             return null;
                           },
                           cursorColor: primaryColor,
-                          style: const TextStyle(
-                              fontFamily: 'Cairo-Regular', fontSize: 16),
-                          decoration: _buildTextFieldDecoration(
+                          style: const TextStyle(fontSize: 16),
+                          decoration: buildInputDecoration(
                             context: context,
                             hintText: "رقم الهاتف",
                             prefixIconData: Icons.phone_android_outlined,
@@ -183,9 +140,8 @@ class Signin extends StatelessWidget {
                             return null;
                           },
                           cursorColor: primaryColor,
-                          style: const TextStyle(
-                              fontFamily: 'Cairo-Regular', fontSize: 16),
-                          decoration: _buildTextFieldDecoration(
+                          style: const TextStyle(fontSize: 16),
+                          decoration: buildInputDecoration(
                             context: context,
                             hintText:
                                 "كلمة المرور", // Hint text will respect TextFormField's textAlign
@@ -258,17 +214,7 @@ class Signin extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-
-            // Lottie Animation
-            SizedBox(
-              height: 200,
-              child: LottieBuilder.asset(
-                "assets/images/41291-human-resources-approval-animation.json",
-                fit: BoxFit.contain,
-              ),
-            ),
             const SizedBox(height: 20),
-
             // Footer Actions (e.g., Sign Up)
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

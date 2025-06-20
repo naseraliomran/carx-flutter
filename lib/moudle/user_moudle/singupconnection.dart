@@ -4,7 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:lottie/lottie.dart';
 
 Future<void> singupco() async {
   Usersignupcontroler controller = Get.put(
@@ -27,14 +26,10 @@ Future<void> singupco() async {
   }
   if (response.body.contains("Authenticate")) {
     Get.rawSnackbar(
-      messageText: LottieBuilder.asset(
-        "assets/images/94303-failed.json",
-        width: 130,
-        height: 130,
-        repeat: false,
-      ),
+      title: 'فشل التسجيل',
       duration: Duration(seconds: 2),
       backgroundColor: Colors.transparent,
+      snackPosition: SnackPosition.BOTTOM,
     );
   } else if (status == 200) {
     Get.toNamed("/login");
