@@ -8,7 +8,6 @@ import 'package:car_x/view/cars/addcar/addcarcontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 var data;
@@ -57,21 +56,10 @@ Future<void> loginco() async {
     }
   } else if (response.body.contains("error")) {
     Get.rawSnackbar(
-      titleText: Text(
-        'تأكد من رقم الهاتف او كلمة المرور',
-        style: TextStyle(
-            color: Color(0xFFC91F1F),
-            fontSize: 23,
-            fontFamily: 'Cairo-Regular'),
-      ),
-      messageText: LottieBuilder.asset(
-        "assets/images/94303-failed.json",
-        width: 130,
-        height: 130,
-        repeat: false,
-      ),
+      title: 'تأكد من رقم الهاتف او كلمة المرور',
       duration: Duration(seconds: 2),
       backgroundColor: Colors.white38,
+      snackPosition: SnackPosition.BOTTOM,
     );
   }
 }

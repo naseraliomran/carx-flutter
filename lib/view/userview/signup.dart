@@ -2,53 +2,14 @@ import 'package:car_x/control/user_controller/singupcontroller.dart';
 import 'package:car_x/moudle/user_moudle/singupconnection.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:car_x/widgets/input_decoration.dart';
 
 class Signup extends StatelessWidget {
   final Usersignupcontroler controller = Get.put(Usersignupcontroler());
 
   Signup({super.key});
 
-  InputDecoration _buildTextFieldDecoration({
-    required BuildContext context,
-    required String hintText,
-    required IconData prefixIconData,
-    required Color primaryColor,
-    Widget? suffixIcon,
-  }) {
-    return InputDecoration(
-      prefixIcon: Icon(prefixIconData, color: primaryColor, size: 22),
-      hintText: hintText,
-      hintStyle: TextStyle(
-          fontFamily: 'Cairo-Regular', // الخط الأساسي
-          fontSize: 15,
-          color: Colors.grey[500]),
-      filled: true,
-      fillColor: Colors.grey[50],
-      contentPadding:
-          const EdgeInsets.symmetric(vertical: 16.0, horizontal: 15.0),
-      border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12.0),
-        borderSide: BorderSide(color: Colors.grey[300]!),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12.0),
-        borderSide: BorderSide(color: Colors.grey[300]!),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12.0),
-        borderSide: BorderSide(color: primaryColor, width: 1.5),
-      ),
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12.0),
-        borderSide: const BorderSide(color: Colors.red, width: 1.0),
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12.0),
-        borderSide: const BorderSide(color: Colors.red, width: 1.5),
-      ),
-      suffixIcon: suffixIcon,
-    );
-  }
+
 
   Future<void> _selectDate(BuildContext context) async {
     DateTime? picked = await showDatePicker(
@@ -141,11 +102,9 @@ class Signup extends StatelessWidget {
                   'إنشاء حساب جديد',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'Cairo-Regular', // الخط الأساسي
                     fontSize: 26,
                     color: primaryColor,
-                    fontWeight:
-                        FontWeight.bold, // استخدام الوزن العريض للعنوان الرئيسي
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -153,7 +112,6 @@ class Signup extends StatelessWidget {
                   "يرجى ملء البيانات التالية لإكمال التسجيل",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontFamily: 'Cairo-Regular', // الخط الأساسي
                     fontSize: 15,
                     color: Colors.grey[700],
                   ),
@@ -202,9 +160,7 @@ class Signup extends StatelessWidget {
                   "هل لديك حساب بالفعل؟",
                   textAlign: TextAlign.right,
                   style: TextStyle(
-                      fontFamily: 'Cairo-Regular', // الخط الأساسي
-                      fontSize: 15,
-                      color: Colors.grey[700]),
+                      fontSize: 15, color: Colors.grey[700]),
                 ),
                 const SizedBox(width: 4),
                 TextButton(
@@ -219,11 +175,9 @@ class Signup extends StatelessWidget {
                     "تسجيل الدخول",
                     textAlign: TextAlign.right,
                     style: TextStyle(
-                      fontFamily: 'Cairo-Regular', // الخط الأساسي
                       fontSize: 15,
                       color: primaryColor,
-                      fontWeight: FontWeight
-                          .bold, // استخدام الوزن العريض للنص القابل للضغط
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
@@ -253,9 +207,8 @@ class Signup extends StatelessWidget {
           return null;
         },
         cursorColor: primaryColor,
-        style: const TextStyle(
-            fontFamily: 'Cairo-Regular', fontSize: 16), // الخط الأساسي
-        decoration: _buildTextFieldDecoration(
+        style: const TextStyle(fontSize: 16),
+        decoration: buildInputDecoration(
           context: context,
           hintText: "اسم المستخدم",
           prefixIconData: Icons.person_outline,
@@ -279,9 +232,8 @@ class Signup extends StatelessWidget {
           return null;
         },
         cursorColor: primaryColor,
-        style: const TextStyle(
-            fontFamily: 'Cairo-Regular', fontSize: 16), // الخط الأساسي
-        decoration: _buildTextFieldDecoration(
+        style: const TextStyle(fontSize: 16),
+        decoration: buildInputDecoration(
           context: context,
           hintText: "رقم الهاتف",
           prefixIconData: Icons.phone_android_outlined,
@@ -313,9 +265,8 @@ class Signup extends StatelessWidget {
               return null;
             },
             cursorColor: primaryColor,
-            style: const TextStyle(
-                fontFamily: 'Cairo-Regular', fontSize: 16), // الخط الأساسي
-            decoration: _buildTextFieldDecoration(
+            style: const TextStyle(fontSize: 16),
+            decoration: buildInputDecoration(
               context: context,
               hintText: "سنة الميلاد",
               prefixIconData: Icons.cake_outlined,
@@ -339,9 +290,8 @@ class Signup extends StatelessWidget {
           return null;
         },
         cursorColor: primaryColor,
-        style: const TextStyle(
-            fontFamily: 'Cairo-Regular', fontSize: 16), // الخط الأساسي
-        decoration: _buildTextFieldDecoration(
+        style: const TextStyle(fontSize: 16),
+        decoration: buildInputDecoration(
           context: context,
           hintText: "الوظيفة",
           prefixIconData: Icons.work_outline,
@@ -367,9 +317,8 @@ class Signup extends StatelessWidget {
           return null;
         },
         cursorColor: primaryColor,
-        style: const TextStyle(
-            fontFamily: 'Cairo-Regular', fontSize: 16), // الخط الأساسي
-        decoration: _buildTextFieldDecoration(
+        style: const TextStyle(fontSize: 16),
+        decoration: buildInputDecoration(
           context: context,
           hintText: "كلمة المرور",
           prefixIconData: Icons.lock_outline,
@@ -391,9 +340,7 @@ class Signup extends StatelessWidget {
               Text(
                 "الجنس:",
                 style: TextStyle(
-                    fontFamily: 'Cairo-Regular',
-                    fontSize: 16,
-                    color: Colors.grey[700]), // الخط الأساسي
+                    fontSize: 16, color: Colors.grey[700]),
               ),
               _genderOption(
                 context,
@@ -468,12 +415,10 @@ class Signup extends StatelessWidget {
             Text(
               label,
               style: TextStyle(
-                fontFamily: 'Cairo-Regular', // الخط الأساسي
                 fontSize: 14,
                 color: isSelected ? primaryColor : Colors.grey[700],
-                fontWeight: isSelected
-                    ? FontWeight.bold
-                    : FontWeight.normal, // استخدام الوزن العريض عند الاختيار
+                fontWeight:
+                    isSelected ? FontWeight.bold : FontWeight.normal,
               ),
             ),
           ],
@@ -506,9 +451,8 @@ class Signup extends StatelessWidget {
           "إنشاء الحساب",
           textAlign: TextAlign.center,
           style: TextStyle(
-            fontFamily: 'Cairo-Regular', // الخط الأساسي
             fontSize: 18,
-            fontWeight: FontWeight.bold, // استخدام الوزن العريض لنص الزر
+            fontWeight: FontWeight.bold,
             color: onPrimaryColor,
           ),
         ),
